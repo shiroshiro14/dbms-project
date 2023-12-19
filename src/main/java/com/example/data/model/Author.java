@@ -1,27 +1,28 @@
 package com.example.data.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@Getter
+@Setter
 @Entity
+@Table(name="author")
 public class Author {
 
     @Id
-    @Getter
-    @Setter
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
 
-    @Getter
-    @Setter
     private String name;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "author")
+    private List<Book> books;
 
 }

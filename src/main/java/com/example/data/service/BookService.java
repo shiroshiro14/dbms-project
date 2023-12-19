@@ -44,7 +44,7 @@ public class BookService {
 
     @Transactional
     public ResponseEntity<Object> create(Book book) {
-        Optional<Book> temp = bookRepository.findById(Long.valueOf(book.getId()));
+        List<Book> temp = bookRepository.findByTitle(book.getTitle());
 
         if (temp == null) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

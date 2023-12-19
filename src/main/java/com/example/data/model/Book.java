@@ -1,42 +1,39 @@
 package com.example.data.model;
 
 import jakarta.annotation.Nullable;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.cglib.core.Local;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+import static jakarta.persistence.CascadeType.ALL;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@Getter
+@Setter
 @Entity
+@Table(name = "book")
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Getter
-    @Setter
     private int id;
 
-    @Getter
-    @Setter
     private String title;
 
-    @Getter
-    @Setter
-    private BigDecimal price;
+    private BigDecimal price = BigDecimal.valueOf(0);
 
-    @Getter
-    @Setter
     @CreationTimestamp
     private LocalDate publishDate;
 
-    @Getter
-    @Setter
-    private int author;
+    @ManyToOne
+    private Author author;
+
+    private boolean inStock = true;
+
 }
