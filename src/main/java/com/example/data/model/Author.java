@@ -1,5 +1,6 @@
 package com.example.data.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -16,13 +17,18 @@ public class Author {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Getter
+    @Setter
     private int id;
 
 
     private String name;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "author")
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "author")
     private List<Book> books;
 
+    public Author(String name){
+        this.name = name;
+    }
 }

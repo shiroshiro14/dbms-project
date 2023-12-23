@@ -32,6 +32,7 @@ public class Book {
     private LocalDate publishDate;
 
     @ManyToOne
+    @JoinColumn(name="author_id", nullable = true)
     private Author author;
 
     private boolean inStock = true;
